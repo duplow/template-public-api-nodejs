@@ -1,0 +1,1929 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "This is a sample Private API",
+    "version": "3.0.0",
+    "title": "Node.js template for Private APIs",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "contact@example.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "projects",
+      "description": "Projetos"
+    },
+    {
+      "name": "services",
+      "description": "Serviços"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],  
+  "paths": {    
+    "/v1/projects": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/requestIdParam"
+        }
+      ],
+      "get": {
+        "summary": "Filter projects",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
+          },
+          {
+            "$ref": "#/components/parameters/searchParam"
+          },
+          {
+            "$ref": "#/components/parameters/tagsParam"
+          },
+          {
+            "$ref": "#/components/parameters/deletedsParam"
+          },
+          {
+            "$ref": "#/components/parameters/orderParam"
+          },
+          {
+            "$ref": "#/components/parameters/fieldsParam"
+          },
+          {
+            "$ref": "#/components/parameters/fieldsIncludeParam"
+          },
+          {
+            "$ref": "#/components/parameters/fieldsExcludeParam"
+          }
+        ],
+        "tags": ["projects"]
+      },
+      "post": {
+        "summary": "Create a new project",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": true,
+                "$ref": "#/components/CreateProjectRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["projects"]
+      }
+    },
+    "/v1/projects/{projectId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "projectId",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Retrieve one project by ID",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/deletedsParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["projects"]
+      },
+      "put": {
+        "summary": "Update a existing project",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["projects"]
+      },
+      "delete": {
+        "summary": "Delete a existing project",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["projects"]
+      }
+    },    
+    "/v1/attributes": {
+      "parameters": [                
+        {
+          "$ref": "#/components/parameters/requestIdParam"
+        }
+      ],
+      "get": {
+        "summary": "Filter attributes",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/projectIdParam"
+          },
+          {
+            "$ref": "#/components/parameters/tagsParam"
+          },
+          {
+            "$ref": "#/components/parameters/deletedsParam"
+          }
+        ],
+        "tags": ["attributes"]
+      },
+      "post": {
+        "summary": "Create a new attribute",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutAttribute",
+                "required": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["attributes"]
+      }
+    },
+    "/v1/attributes/{attributeId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "attributeId",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": true
+        },
+        {
+          "$ref": "#/components/parameters/requestIdParam"
+        }
+      ],
+      "get": {
+        "summary": "Retrieve an existing attribute",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/deletedsParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["attributes"]
+      },
+      "put": {
+        "summary": "Update an existing attribute",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutAttribute",
+                "required": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["attributes"]
+      },
+      "delete": {
+        "summary": "Delete an existing attribute",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["attributes"]
+      }
+    },
+    "/v1/services": {
+      "get": {
+        "summary": "Filter services",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/offsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/limitParam"
+          },
+          {
+            "$ref": "#/components/parameters/projectIdParam"
+          },
+          {
+            "$ref": "#/components/parameters/searchParam"
+          },
+          {
+            "$ref": "#/components/parameters/tagsParam"
+          },
+          {
+            "$ref": "#/components/parameters/deletedsParam"
+          },
+          {
+            "$ref": "#/components/parameters/requestIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {
+              "X-Offset": {
+                "type": "integer",
+                "description": "Skipped records"
+              },
+              "X-Limit": {
+                "type": "integer",
+                "description": "Max returned records per request"
+              },
+              "X-Total-Count": {
+                "type": "integer",
+                "description": "Total found records"
+              }
+            },
+            "schema": {
+              "$ref": "#/components/ApiResponse"
+            },
+            "example": {
+              "error": null,
+              "data": {
+                "count": 284,
+                "edges": [
+                  {
+                    "id": "4578sad-...",
+                    "name": "Service 1",
+                    "createdAt": "2021-04-29T12:28:00-03:00"
+                  },
+                  {
+                    "id": "4578sad-...",
+                    "name": "Service 2",
+                    "createdAt": "2021-04-29T12:28:00-03:00"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["services"]
+      },
+      "post": {
+        "summary": "Create a new service",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": true,
+                "$ref": "#/components/Service"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["services"]
+      }
+    },
+    "/v1/services/{serviceId}": {
+      "parameters": [
+        {
+          "name": "serviceId",
+          "in": "path",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": true
+        },
+        {
+          "$ref": "#/components/parameters/deletedsParam"
+        }
+      ],
+      "get": {
+        "summary": "Retrieve an existing service",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/deletedsParam"
+          }      
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["services"]
+      },
+      "put": {
+        "summary": "Update an existing service",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": true,
+                "$ref": "#/components/CreateServiceBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["services"]
+      },
+      "delete": {
+        "summary": "Delete an existing service",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["services"]
+      }
+    },
+    "/v1/service-attributes": {
+      "put": {
+        "summary": "Update service attribute value",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": true,
+                "$ref": "#/components/SetServiceAttributeValueBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["values"]
+      }
+    },
+    "/v1/service-attributes/bulk": {
+      "put": {
+        "summary": "Bulk update service attribute value",
+        "consumes": ["application/json", "application/x-ndjson"],
+        "produces": ["application/json"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": true,
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "required": true,
+                    "items": {
+                      "$ref": "#/components/SetServiceAttributeValueBody"
+                    }
+                  }
+                }
+              }
+            },
+            "application/x-ndjson": {
+              "description": "New line delimited json",
+              "schema": {
+                "type": "string",
+                "required": true,
+                "example": "{\"serviceId\": \"ac8d5ac1-aa03-4850-8e2d-3916c2a8d5c3\", \"attributeId\": \"2aaeea02-d878-442e-87c5-ac2e6afe0294\", \"attributeValue\": \"Attribute 1 value\"}\r\n{\"serviceId\": \"ac8d5ac1-aa03-4850-8e2d-3916c2a8d5c3\", \"attributeId\": \"ceaeeb4d-1949-405b-b1e1-55f29f9138d1\", \"attributeValue\": \"Attribute 2 value\"}\r\n{\"serviceId\": \"ff7355e4-3829-4b1e-9e13-5d664f0eba7b\", \"attributeId\": \"2aaeea02-d878-442e-87c5-ac2e6afe0294\", \"attributeValue\": \"Attribute 1 value\"}\r\n{\"serviceId\": \"ff7355e4-3829-4b1e-9e13-5d664f0eba7b\", \"attributeId\": \"ceaeeb4d-1949-405b-b1e1-55f29f9138d1\", \"attributeValue\": \"Attribute 2 value\"}"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["values"]
+      }
+    },
+    "/v1/markers": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/requestIdParam"
+        }
+      ],
+      "get": {
+        "summary": "Filter markers",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["markers"]
+      },
+      "post": {
+        "summary": "Create a new marker",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Marker",
+                "properties": {
+                  "id": {
+                    "required": false
+                  },
+                  "createdAt": {
+                    "required": false,
+                    "example": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["markers"]
+      }
+    },
+    "/v1/markers/{markerId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "markerId",
+          "description": "ID of marker",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": true
+        },
+        {
+          "$ref": "#/components/parameters/requestIdParam"
+        }
+      ],
+      "get": {
+        "summary": "Fetch a marker by ID",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["markers"]
+      },
+      "put": {
+        "summary": "Update a marker by ID",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["markers"]
+      },
+      "delete": {
+        "summary": "Delete a marker by ID",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["markers"]
+      }
+    },
+    "/v1/cards": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/requestIdParam"
+        }
+      ],
+      "get": {
+        "summary": "Filter cards",
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["cards"]
+      },
+      "post": {
+        "summary": "Create a new card",
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["cards"]
+      }
+    },
+    "/v1/cards/{cardId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "cardId",
+          "description": "ID of card",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": true
+        },
+        {
+          "$ref": "#/components/parameters/requestIdParam"
+        }
+      ],
+      "get": {
+        "summary": "Fetch a card by ID",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["cards"]
+      },
+      "put": {
+        "summary": "Update a card by ID",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["cards"]
+      },
+      "delete": {
+        "summary": "Delete a card by ID",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["cards"]
+      }
+    },
+    "/v1/files": {
+      "get": {
+        "summary": "Filter files",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["files"]
+      },
+      "post": {
+        "summary": "Create a new file",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["files"]
+      }
+    },
+    "/v1/files/{fileId}": {
+      "get": {
+        "summary": "Retrieve an existing file",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "fileId",
+            "in": "path",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["files"]
+      },
+      "put": {
+        "summary": "Update an existing file",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "fileId",
+            "in": "path",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["files"]
+      },
+      "delete": {
+        "summary": "Delete an existing file",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "fileId",
+            "in": "path",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["files"]
+      }
+    },
+    "/v1/upload": {
+      "get": {
+        "summary": "Filter uploads requests",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["upload", "input"]
+      },
+      "post": {
+        "summary": "Create a new upload request",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["upload", "input"]
+      }
+    },
+    "/v1/bulks": {
+      "get": {
+        "summary": "Filter bulks",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/projectIdParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["bulks", "input"]
+      },
+      "post": {
+        "summary": "Create a new bulk load",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Project-Id",
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "required": true,
+                "items": {
+                  "$ref": "#/components/BulkItem"               
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["bulks", "input"]
+      }
+    },
+    "/v1/bulks/{bulkId}": {
+      "get": {
+        "summary": "Retrieve a existing bulk",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "bulkId",
+            "in": "path",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["bulks", "input"]
+      },
+      "put": {
+        "summary": "Update an existing bulk",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["bulks", "input"]
+      }
+    },    
+    "/v1/tasks": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/requestIdParam"
+        }
+      ],
+      "get": {
+        "summary": "Filter tasks",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["tasks"]
+      },
+      "post": {
+        "summary": "Create a new task",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "type": "object",
+              "schema": {
+                "$ref": "#/components/schemas/NewTask"
+              },
+              "required": true
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "tags": ["tasks"]
+      }
+    },
+    "/v1/tasks/{taskId}": {
+      "parameters": [        
+        {
+          "in": "path",
+          "name": "taskId",
+          "description": "ID of task",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": true
+        },
+        {
+          "$ref": "#/components/parameters/requestIdParam"
+        }
+      ],
+      "get": {
+        "summary": "Retrieve an existing task",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],        
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["tasks"]
+      },
+      "put": {
+        "summary": "Update an existing task",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["tasks"]
+      },
+      "delete": {
+        "summary": "Delete an existing task",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "tags": ["tasks"]
+      }
+    },      
+    "/healthcheck": {
+      "get": {
+        "summary": "Display API current health status",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "summary": "Display API current status",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    },
+    "token": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    },
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://petstore.swagger.io/oauth/authorize",
+      "flow": "implicit",
+      "scopes": {
+        "read:pets": "read your pets",
+        "write:pets": "modify pets in your account"
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "requestIdParam": {
+        "in": "header",
+        "name": "X-Request-Id",
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "required": false,
+        "description": "ID of request"
+      },
+      "projectIdParam": {
+        "in": "query",
+        "name": "projectId",
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "ID of project"
+      },
+      "offsetParam": {
+        "in": "query",
+        "name": "from",
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "nullable": true
+        },        
+        "required": false,
+        "description": "Records count to skip **(default=0)**"
+      },
+      "limitParam": {
+        "in": "query",
+        "name": "size",        
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 100,
+          "default": 20,
+          "example": null
+        },
+        "required": false,
+        "description": "Records per request **(default=20)**"
+      },
+      "orderParam": {
+        "in": "query",
+        "name": "orderBy",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "required": false,
+        "nullable": true,
+        "description": "Records sort order (example: \"name=asc,cronological=desc\")"
+      },
+      "searchParam": {
+        "in": "query",
+        "name": "q",
+        "type": "string",
+        "required": false,
+        "description": "Search by record name"
+      },
+      "fieldsParam": {
+        "in": "query",
+        "name": "fields",
+        "schema": {
+          "type": "array",
+          "items": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "style": "form",
+        "explode": false,
+        "required": false,
+        "description": "Fields in response body"
+      },
+      "fieldsIncludeParam": {
+        "in": "query",
+        "name": "includeFields",
+        "schema": {
+          "type": "array",
+          "items": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "style": "form",
+        "explode": false,
+        "required": false,
+        "description": "Fields to include in response body"
+      },
+      "fieldsExcludeParam": {
+        "in": "query",
+        "name": "excludeFields",
+        "schema": {
+          "type": "array",
+          "items": {
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "style": "form",
+        "explode": false,
+        "required": false,
+        "description": "Fields to exclude from response body"
+      },
+      "tagsParam": {
+        "in": "query",
+        "name": "tags",
+        "schema": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "keypair",
+            "example": "name=value"
+          }
+        },
+        "style": "simple",
+        "explode": false,
+        "required": false,
+        "description": "URI encoded tags (example: \"name1=value1,name2=value2\")"
+      },
+      "deletedsParam": {
+        "in": "query",
+        "name": "deleteds",
+        "schema": {
+          "type": "boolean"
+        },
+        "required": false,
+        "description": "Enable/display deleted records"
+      }
+    },
+    "schemas": {
+      "Marker": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "description": "ID of marker"
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid",
+            "required": true,
+            "description": "ID of project"
+          },
+          "name": {
+            "type": "string",
+            "description": "Label of marker"
+          },
+          "iconShape": {
+            "type": "string",
+            "enum": [
+              "pin",
+              "circle",
+              "triangle",
+              "square"
+            ],
+            "required": false,
+            "default": "circle",
+            "description": "Format/shape of marker icon"
+          },
+          "fillColor": {
+            "type": "string",
+            "format": "color",
+            "description": "Inner color of marker icon"
+          },
+          "borderColor": {
+            "type": "string",
+            "format": "color",
+            "description": "Border color of marker icon"
+          },
+          "isDisabled": {
+            "type": "boolean",
+            "required": true,
+            "default": false
+          },
+          "tags": {
+            "type": "array",
+            "$ref": "#/components/Tag"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "required": false
+          }
+        }
+      },
+      "NewTask": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "required": true,
+            "format": "uuid"
+          },
+          "serviceId": {
+            "type": "string",
+            "required": true,
+            "format": "uuid"
+          },
+          "name": {
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          "progressType": {
+            "type": "string",
+            "enum": [
+              "percentage",
+              "check"
+            ],
+            "required": true
+          },
+          "initialProgressValue": {
+            "type": "number",
+            "format": "float",
+            "required": false
+          },
+          "initialProgressChecked": {
+            "type": "boolean",
+            "required": false
+          },
+          "tags": {
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "required": true
+                },
+                "value": {
+                  "type": "string",
+                  "required": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "IncludeFieldsQuery": {
+        "description": "Fields to be included in response",
+        "type": "string",
+        "format": "command_delimited_values",
+        "example": "field1,field2,field3"
+      },
+      "TagsQuery": {
+        "description": "URI encoded tags",
+        "type": "string",
+        "format": "uri_encoded",
+        "example": "name1=value1&name2=value2"
+      },
+      "PutAttribute": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "format": "uuid",
+            "required": true
+          },
+          "name": {
+            "type": "string",
+            "required": true,
+            "example": "My attribute name"
+          },
+          "format": {
+            "type": "string",
+            "enum": ["text", "integer", "float", "date", "date-time"],
+            "default": "text"
+          },
+          "weight": {
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          },
+          "isSearchable": {
+            "type": "boolean",
+            "default": false
+          },
+          "isDisabled": {
+            "type": "boolean",
+            "default": false
+          },
+          "isPinned": {
+            "type": "boolean",
+            "default": false
+          },
+          "deletedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "default": null
+          }
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "value": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    "Marker": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "projectId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string",
+          "description": "Label of Marker"
+        },
+        "iconShape": {
+          "type": "string",
+          "enum": [
+            "pin",
+            "circle",
+            "triangle",
+            "square"
+          ]
+        },
+        "fillColor": {
+          "type": "string",
+          "format": "color"
+        },
+        "borderColor": {
+          "type": "string",
+          "format": "color"
+        },
+        "isDisabled": {
+          "type": "boolean",
+          "required": true,
+          "default": false
+        },
+        "tags": {
+          "type": "array",
+          "$ref": "#/components/Tag"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "required": true
+        }
+      }
+    },
+    "Card": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "required": true
+        },
+        "projectId": {
+          "type": "string",
+          "format": "uuid",
+          "required": true
+        },
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Label of Card"
+        },
+        "accentColor": {
+          "type": "string",
+          "format": "color",
+          "required": true
+        },
+        "backgroundColor": {
+          "type": "string",
+          "format": "color",
+          "required": true
+        },
+        "foregroundColor": {
+          "type": "string",
+          "format": "color",
+          "required": true
+        },
+        "icon": {
+          "type": "string",
+          "enum": [
+            "none",
+            "question",
+            "exclamation",
+            "tools",
+            "timing"
+          ]
+        },
+        "isDisabled": {
+          "type": "boolean",
+          "required": true,
+          "default": false
+        },
+        "tags": {
+          "type": "array",
+          "$ref": "#/components/Tag"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "required": true
+        }
+      }
+    },
+    "Attribute": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "required": true
+        },
+        "projectId": {
+          "type": "string",
+          "format": "uuid",
+          "required": true,
+          "description": "ID of Attribute"
+        },
+        "name": {
+          "type": "string",
+          "description": "Label of Attribute"
+        },
+        "format": {
+          "type": "string",
+          "required": true,
+          "enum": [
+            "text",
+            "integer",
+            "float",
+            "timestamp"
+          ],
+          "default": "text",
+          "description": "Data format of Attribute"
+        },
+        "inputName": {
+          "type": "string",
+          "deprecated": true
+        },
+        "elasticName": {
+          "type": "string",
+          "deprecated": true
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority of presentation"
+        },
+        "enableIndexation": {
+          "type": "boolean",
+          "default": false
+        },
+        "isSearchable": {
+          "type": "boolean",
+          "default": false
+        },
+        "isVisible": {
+          "type": "boolean"
+        },
+        "isPinned": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "tags": {
+          "type": "array",
+          "$ref": "#/components/Tag"
+        }
+      }
+    },
+    "Step": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "position": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "isDisabled": {
+          "type": "boolean"
+        },
+        "isAutomaticallyGenerated": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Service": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "required": true,
+          "unique": true
+        },
+        "projectId": {
+          "type": "string",
+          "format": "uuid",
+          "required": true
+        },
+        "markerId": {
+          "type": "string",
+          "format": "uuid",
+          "required": true
+        },
+        "cardId": {
+          "type": "string",
+          "format": "uuid",
+          "required": true
+        },
+        "trackCode": {
+          "type": "string",
+          "unique": true,
+          "required": false
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "required": true
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "required": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "required": false
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "required": false
+        },
+        "lastPaintedAt": {
+          "type": "string",
+          "format": "date-time",
+          "required": false
+        },
+        "lastIndexedAt": {
+          "type": "string",
+          "format": "date-time",
+          "required": false
+        },
+        "deletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "required": false
+        }
+      }
+    },
+    "BulkItem": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": false
+        },
+        "uid": {
+          "type": "string",
+          "required": true
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "required": false
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "required": false
+        },
+        "attributes": {
+          "type": "object"
+        }
+      }
+    },
+    "CreateProjectRequestBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "description": "Project name",
+          "example": "My project name"
+        },
+        "ownerId": {
+          "type": "string",
+          "format": "uuid",
+          "required": true,
+          "example": "82ddb39b-7ee0-42c1-b521-734f0bc5168b",
+          "description": "ID of user"
+        },
+        "tags": {
+          "required": false,
+          "type": "array",
+          "description": "Project tags",
+          "items": {
+            "$ref": "#/components/Tag"
+          }
+        },
+        "sendUserNotification": {
+          "type": "boolean",
+          "required": false,
+          "default": true,
+          "example": "true"
+        }
+      }
+    },
+    "SetServiceAttributeValueBody": {
+      "type": "object",
+      "properties": {
+        "serviceId": {
+          "type": "string",
+          "format": "uuid",
+          "required": true,
+          "example": "82ddb39b-7ee0-42c1-b521-734f0bc5168b",
+          "description": "ID of service"
+        },
+        "attributeId": {
+          "type": "string",
+          "format": "uuid",
+          "required": true,
+          "example": "82ddb39b-7ee0-42c1-b521-734f0bc5168b",
+          "description": "ID of attribute"
+        },
+        "attributeValue": {
+          "type": "string",
+          "required": true,
+          "example": "My attribute value",
+          "description": "Value of attribute"
+        }
+      }
+    },
+    "CreateServiceBody": {
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "format": "uuid",
+          "required": true
+        },
+        "markerId": {
+          "type": "string",
+          "format": "uuid",
+          "required": false
+        },
+        "cardId": {
+          "type": "string",
+          "format": "uuid",
+          "required": false
+        },
+        "trackCode": {
+          "type": "string",
+          "required": false
+        },
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "required": true
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "required": true
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "required": false
+        },
+        "data": {
+          "type": "object",
+          "required": false,
+          "properties": {
+            "count": {
+              "type": "integer",
+              "format": "int32",
+              "required": true
+            },
+            "edges": {
+              "type": "array",
+              "required": true,
+              "items": {
+                "$ref": "#/components/Service"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
